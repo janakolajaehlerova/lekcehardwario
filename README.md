@@ -1,3 +1,5 @@
+Obraz stránek: https://perun.nti.tul.cz/~jana/lekce/
+
 🛠️ Přehled lekcí pro Hardwario Tower
 🔧 Lekce 1: Připrav si prostředí
 
