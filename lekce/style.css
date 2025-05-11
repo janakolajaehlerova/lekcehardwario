@@ -1,0 +1,243 @@
+body {
+  background-color: #333333;
+  color: #f0f0f0;
+  font-family: 'Georgia', serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+}
+a,a.link,a.visited{
+    color: #ff4d4d;
+}
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+main {
+  text-align: center;
+  max-width: 800px;
+  padding: 2rem;
+}
+
+p.ukol {
+  font-weight: bold;
+  color: #ffcccc;
+}
+
+p.tip {
+  border-left: 4px solid red;
+  background-color: #444;
+  padding: 1rem;
+  margin: 1rem 0;
+  text-align: left;
+  position: relative;
+}
+
+p.tip::before {
+  content: "💡";
+  position: absolute;
+  left: -2rem;
+  top: 1rem;
+  font-size: 1.5rem;
+}
+
+/* Nový styl pro "pro koho" */
+p.prokoho {
+  border-left: 4px solid red;
+  background-color: #444;
+  padding: 1rem;
+  margin: 1rem 0;
+  text-align: left;
+  position: relative;
+}
+
+p.prokoho::before {
+  content: "👤";
+  position: absolute;
+  left: -2rem;
+  top: 1rem;
+  font-size: 1.5rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.buttons a {
+  text-decoration: none;
+  color: #ffffff;
+  border: 2px solid red;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  background: transparent;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.buttons a:hover {
+  background: linear-gradient(to right, #ff4d4d, #ff1a1a);
+  color: #ffffff;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
+}
+/* H1 - hlavní nadpis */
+h1 {
+  font-family: 'Arial', sans-serif;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+h1::after {
+  content: "";
+  display: block;
+  height: 3px;
+  background: #ff4d4d;
+  width: 100%;
+  margin-top: 6px;
+}
+
+/* H3 - podnadpisy s číslováním */
+main {
+  counter-reset: h3counter;
+}
+
+h3 {
+  counter-increment: h3counter;
+  position: relative;
+  text-align: left;
+  padding-left: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+h3::before {
+  content: counter(h3counter) ". ";
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+  color: #ff4d4d;
+}
+
+h3::after {
+  content: "";
+  display: block;
+  height: 2px;
+  background: #ff4d4d;
+  width: 100%;
+  margin-top: 4px;
+}
+
+/* Běžné odstavce */
+p {
+  text-align: justify;
+  margin-bottom: 1rem;
+  font-family: 'Georgia', serif;
+  line-height: 1.6;
+}
+#install-button {
+  background-color: #ff4d4d;
+  color: white;
+  font-family: 'Arial', sans-serif;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+#install-button:hover {
+  background-color: #e60000;
+}
+
+.modal-header {
+  display: none;
+}
+
+ul {
+  list-style-type: none;     /* odstraní odrážky */
+  padding-left: 0;           /* odstraní odsazení */
+  margin: 1em 0;
+  text-align: justify;       /* zarovná do bloku */
+}
+
+ul li {
+  padding: 0.5em 0;
+  border-bottom: 1px solid #555;  /* oddělí jednotlivé položky lehkou čárou */
+}
+
+ol {
+  padding-left: 0;           /* odstraní odsazení */
+  margin: 1em 0;
+  text-align: justify;       /* zarovná do bloku */
+}
+
+.lesson-box {
+  margin-bottom: 2em;
+}
+
+button#lekce1-button,
+button#lekce2-button {
+  display: block;
+  margin: auto;
+  background-color: #cc0000;
+  color: white;
+  padding: 1em 2em;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.2em;
+  cursor: pointer;
+  margin-bottom: 0.5em;
+  transition: background-color 0.3s ease;
+}
+
+button#lekce1-button:hover,
+button#lekce2-button:hover {
+  background-color: #990000;
+}
+
+.task-list {
+  max-width: 300px;
+  margin: auto;
+  padding-left: 1.2em;
+  text-align: left;
+  color: #f0f0f0;
+  font-family: Georgia, serif;
+}
+
+.primary-button {
+  background-color: #ff4d4d;
+  color: white;
+  font-family: 'Arial', sans-serif;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: inline-block;
+  text-align: center;
+}
+
+.primary-button:hover {
+  background-color: #e60000;
+  transform: scale(1.03);
+}
+
+

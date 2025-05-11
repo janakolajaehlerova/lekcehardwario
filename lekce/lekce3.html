@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Lekce 3 – Ukázat či neukázat?</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <h1>Lekce 3 – Ukázat či neukázat?</h1>
+
+  <p class="prokoho">
+    🧑‍💻 Trvání: 30 minut<br>
+    🎯 Cílová skupina: pro jednotlivce (či skupiny, co se nepohádají)
+  </p>
+
+  <section id="section-start">
+    <h3>Úvod</h3>
+    <p>Už umíte připojit moduly Hardwario Tower a zobrazit jejich výstupy pomocí grafů a měřidel. 
+  V této lekci se ponoříme hlouběji do programování v prostředí Playground. 
+  Naučíte se pracovat se zprávami (messages), filtrovat je podle tématu a vytvářet podmíněné výstupy — například rozsvítit LED pouze při splnění určité hodnoty. 
+  Díky tomu začnete programovat chování systému, nejen sbírat data.</p>
+  
+      <h3>Co je připraveno</h3>
+<ul>
+  <li>✅ PIR modul je připojený, napájený a spárovaný.</li>
+  <li>✅ V Playgroundu přicházejí data o orientaci, teplotě a přítomnosti osoby.</li>
+  <li>✅ Dashboard zobrazuje aktuální hodnoty z modulu.</li>
+  <li>✅ Víte, jak si hodnoty znovu zobrazit nebo upravit, pokud zmizí.</li>
+</ul>
+
+    <button class="primary-button" onclick="document.getElementById('section-next').style.display='block'; this.style.display='none';">
+      Ano, PIR připojeno, hodnoty čtu i vykresluji.
+    </button>
+  </section>
+
+  <section id="section-next" style="display:none;">
+  <h3>Kdo to všechno začne</h3>
+<p>
+  Ve vaší flow začněte uzlem <strong>mqtt in</strong>, který bude odebírat zprávy s orientací. V mém případě se jmenuje <code>node/motion-detector:0/orientation</code>, ale může se u vás mírně lišit podle názvu zařízení.
+</p>
+<p class="tip">Aby bylo možné s nějakou zprávou pracovat, musí nejprve vůbec přijít. Pro testování se skvěle hodí PIR senzor, konkrétně jeho gyroskop, protože množství a četnost zpráv můžete snadno ovlivnit pouhým překlápěním modulu. </p>
+<p>
+  Co daný uzel vrací, už víte z předchozí lekce – lze jej například vykreslit do grafu. Pro lepší pochopení si ale doporučujeme výstup z uzlu <strong>mqtt in</strong> napojit na uzel <strong>debug</strong>. Ve výchozím nastavení se v debug výstupu zobrazí obsah <code>msg.payload</code>, tedy samotná hodnota přicházející ze senzoru. U mého PIR modulu se objevují čísla v rozsahu 1 až 6 podle toho, jak je natočený – a právě s touto hodnotou budeme dále pracovat.
+</p>
+<h3>Switch rozdělí výstup</h3>
+<p>
+  Uzel <strong>Switch</strong> ze sekce <em>Function</em> má jeden vstup a minimálně jeden výstup. Po rozkliknutí můžete uzel pojmenovat, což vám usnadní orientaci ve vašem flow. V poli <strong>Property</strong> nastavíte, s jakou hodnotou má uzel pracovat – v tomto případě <code>msg.payload</code>. Níže pak nastavíte jednotlivé podmínky výstupu. Pro tuto úlohu nás zajímá situace, kdy má orientace hodnotu <strong>6</strong> (modul leží na PIR senzoru), a všechno ostatní zachytíte pomocí volby <em>otherwise</em>, která se nachází na konci seznamu podmínek.
+</p>
+<h3>Change změní zprávu</h3>
+<p>
+<code>msg.payload</code> je v tuhle chvíli nastavený stále na 1-5 nebo 6, podle toho, na kterém výstupu <strong>Switch</strong>e je zrovna flow. node <strong>Change</strong> změní <code>msg.payload</code> na vaši hodnotu - v mém případě jsem změnila hodnotu na "jsem v klidu" pro hodnoty payload 1-5, nebo "spadnu" pro payload 6. Použity jsou tímto dva node <strong>Change</strong>. 
+</p>
+<h3>Text v Dashboard</h3>
+<p>Aby bylo možné vytisknout nějaký text, v sekci Dashboard je node <strong>Text</strong>. Pojmenujte jej, abyste si jej ve Flow poznali (v mém případě se jmenuje "Co PIR senzor?") a nechte jej zobrazovat <code>msg.payload</code>, které v tuto chvíli nabývá hodnoty "Jsem v klidu" nebo "Bacha spadnu".</p>
+
+<img src="img/function_text.png" alt="Funkce pro změnu">
+<h3>Z čísla do textu</h3>
+<p>Funguje to? V tuhle chvíli byste po otočení PIR modulu měli vidět, jak na dashboardu se text mění z "Jsem v klidu" na "Bacha spadnu". Pokud tam máte k tomu i Gauge z minulého programu, uvidíte aktuální otočení PIR modulu.</p>
+
+
+    <button class="primary-button" onclick="document.getElementById('section-end').style.display='block'; this.style.display='none';">
+      Otáčím modulem a text se mění.
+    </button>
+  </section>
+
+  <section id="section-end" style="display:none;">
+  <h3>Hlídač</h3>
+<p>PIR modul je tady použitý jako gyroskopická kostka. Použijte jej opravdu jako PIR senzor! Naprogramujte jej, aby sledoval přítomnost osoby a psal na Dashboard, jestli někoho vidí nebo ne.</p>
+
+     <h3>Shrnutí</h3>
+    <p>Vstup generuje zprávy a ty umíte měnit pomocí <strong>Change</strong>.</p>
+    <p>Zprávy umíte filtrovat pomocí <strong>Switch</strong> a předávat je dalším uzlům pro zpracování.</p>
+    <p>V Dashboardu tisknete vlastní zprávy.</p>
+
+    <button class="primary-button" onclick="ukoncitLekci()">
+      Umím si pohrát s <code>msg.payload</code> a vytisknout jej na Dashboard.
+    </button>
+  </section>
+  
+
+  <script>
+    function ukoncitLekci() {
+      localStorage.setItem('lekce3Dokoncena', 'true');
+      alert("🎉 Skvělé, lekce 3 je dokončena!");
+      window.location.href = "index.html";
+    }
+  </script>
+</main>
+</body>
+</html>
+

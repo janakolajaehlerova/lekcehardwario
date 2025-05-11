@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Lekce 5 – Vzhůru na net</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <h1>Lekce 5 – Vzhůru na net</h1>
+
+  <p class="prokoho">
+    🧑‍💻 Trvání: 40 minut<br>
+    🎯 Cílová skupina: pro jednotlivce či dvojice
+  </p>
+
+  <section id="section-start">
+    <h3>Úvod</h3>
+    <p>Dosud jste si hráli s moduly stavebnice Hardwario Tower a seznamovali se s prostředím Hardwario Playground. Nyní však nastal čas posunout se dál.</p>
+
+<p>Ve zkratce IoT představuje spojení fyzických zařízení s internetem – a právě ono „I“ jako internet zatím ve vašich projektech nehrálo žádnou roli. Připojíme se proto pomocí aplikace Blynk, která umožňuje komunikaci jak přes mobilní telefon, tak přes webové rozhraní.</p>
+  
+      <h3>Co je připraveno</h3>
+<ul>
+  <li>✅ Prostředí Playground.</li>
+  <li>✅ Spárovaný Climate Module – nebo libovolný modul, ze kterého budeme číst aspoň teplotu.</li>
+  <li>✅ Mobilní telefon, na který můžete instalovat aplikace.</li>
+</ul>
+
+    <button class="primary-button" onclick="document.getElementById('section-next').style.display='block'; this.style.display='none';">
+      Ano, mám připravený mobil i Hardwario Tower.
+    </button>
+  </section>
+
+  <section id="section-next" style="display:none;">
+<h3>Připravte si aplikaci Blynk IoT</h3>
+<ol>
+  <li>Vytvořte si registraci na <a href="https://blynk.cloud" target="_blank">blynk.cloud</a> kliknutím na <strong>Create new account</strong>.</li>
+  <li>Vytvořte novou šablonu (<strong>Create New Template</strong>), vyplňte jméno, jako typ hardwaru zvolte <em>Other</em>, na typu připojení také nezáleží. Tlačítkem <strong>Done</strong> dokončete vytvoření šablony.</li>
+  <li>Nyní nastavte nový Datastream. Na detailu šablony klikněte na záložku <strong>Datastreams</strong>. Vpravo nahoře klikněte na <strong>Edit</strong>. Objeví se tlačítko <strong>+ New Datastream</strong> – klikněte na něj, vyberte <strong>Virtual Pin</strong> a otevře se dialogové okno.</li>
+  <li>Nastavte název pro nový Datastream (například <strong>Notification</strong>) a vyberte jeden z volných Pinů (libovolný). V mobilní notifikaci budete chtít vypsat osvětlení, proto jako datový typ zvolte <strong>Double</strong>.</li>
+  <li>V dialogovém okně nahoře jste v nastavení <strong>General</strong>. Přepněte se do záložky <strong>Expose to Automation</strong>, díky tomu bude možné stream použít v automatizacích. V selektoru vedle zvolte <strong>Sensor</strong> a zaškrtněte také <strong>Condition</strong> a <strong>Action</strong>. Datastream vytvoříte kliknutím na <strong>Create</strong>.</li>
+  <li>Vpravo nahoře svou práci uložte tlačítkem <strong>Save</strong>. Uložte si vaše Template ID</li>
+</ol>
+
+<h3>Založte v Blynk zařízení</h3>
+<ol>
+   <li>Přejděte v Blynku na Deviced. Tlačítkem <strong>+ New Device</strong> otevřete okno pro vytvoření nového zařízení.</li>
+  <li>Ve výběru způsobu vytvoření zvolte <strong>From template</strong>. V následujícím formuláři vyberte svou šablonu a přiřaďte zařízení jméno. Kliknutím na <strong>Create</strong> proces dokončíte.</li>
+  <li>Uložte si informace, které vám dává Blynk, Template ID byste už měli mít, teď získáte Auth Token</li>
+</ol>
+
+<h3>Přesuňte se do Playgroundu</h3>
+<ol>
+  <li>V záložce <strong>Functions</strong> najděte nody, které pracují s novou verzí Blynk – jsou označené sekcí <strong>Blynk IoT</strong>.</li>
+  <li>Pro zápis hodnot do vytvořeného datastreamu vyberte node <strong>write</strong>.</li>
+  <li>Dvojklikem se dostanete do jeho nastavení.</li>
+  <li>Vpravo klikněte na malou tužku – tím otevřete nové okno.</li>
+  <li>Do pole <strong>Url</strong> vložte <code>blynk.cloud</code>, do polí <strong>Auth Token</strong> a <strong>Template ID</strong> zkopírujte hodnoty z detailu zařízení ve webové aplikaci na počítači.</li>
+  <li>Nastavení potvrďte kliknutím na <strong>Add</strong>.</li>
+  <li>Vyplňte číslo virtuálního pinu vašeho datastreamu a tlačítkem <strong>Done</strong> vše uložte.</li>
+  <li>Nyní můžete nastavit svou flow v Node-RED, kde spojíte mqtt out node, který dává osvětlení ze senzoru s write node pro Blynk.</li>
+</ol>
+<img src="img/function_blynk1.png" alt="Ukázka nastavení Blynk node ve Flow">
+
+<h3>Nastavte si mobilní aplikaci</h3>
+<ol>
+  <li>Aplikaci <strong>Blynk IoT</strong> si stáhněte do mobilního zařízení z <strong>App Store</strong> nebo <strong>Google Play</strong>.</li>
+  <li>Přihlaste se do ní pomocí svých přihlašovacích údajů.</li>
+  <li>Na úvodní stránce uvidíte vámi vytvořené zařízení.</li>
+  <li>Otevřete jej kliknutím a nastavte si dashboard:<br>
+      Pod klíčem vpravo nahoře najdete nastavovací stránku dashboardu.</li>
+  <li>V <strong>My Templates</strong> najdete svůj template. Klikněte na něj. Tlačítkem <strong>+</strong> nebo kliknutím někam na plochu přidejte nový widget. Například <strong>Value Display</strong>.</li>
+  <li>Stiskem přidaného widgetu zobrazíte okno s jeho nastavením. Nejdůležitější je doplnit <strong>Datastream</strong> z vaší šablony pro vybraný virtuální Pin.</li>
+</ol>
+
+<h3>Vytvořte automatizaci</h3>
+<ol>
+  <li>Přepněte se ve webové aplikaci Blynk do sekce <strong>Automation</strong> a klikněte na tlačítko <strong>+ Create Automation</strong>.</li>
+  
+  <li>Z dostupných možností vyberte <strong>Device State</strong>. Automatizace se spustí vždy, když do aplikace pošlete zprávu.</li>
+  
+  <li>Nastavení automatizace probíhá ve dvou krocích: <strong>When</strong> – kdy se má automatizace spustit, a <strong>Do this</strong> – co se má stát.</li>
+  
+  <li>Nejprve nastavte sekci <strong>When</strong>. Vyberte své zařízení a vytvořený <strong>Datastream</strong>. Objeví se třetí selektor – ten ponechte nastavený na <strong>Is Any</strong>.</li>
+  
+  <li>V sekci <strong>Do This</strong> klikněte na <strong>Send In-App Notification</strong> a nastavte si příjemce. Pro zjednodušení zde nastavte sebe.</li>
+  
+  <li>Do polí <strong>Subject</strong> a <strong>Message</strong> přetáhněte myší položku <strong>Trigger value</strong> – jde o proměnnou, kde bude uložen text vaší zprávy.</li>
+  
+  <li>Nakonec nezapomeňte nastavit název automatizace.</li>
+  
+  <li>Kliknutím na <strong>Save</strong> automatizaci uložte.</li>
+</ol>
+<h3>Spusťte to</h3>
+<ol>
+  <li>V Hardwario Playground stiskněte tlačítko <strong>Deploy</strong>.</li>
+  <li>Změňte osvětlení svého Climate modulu, abyste viděli v <strong>Messages</strong>, že posílá novou hodnotu.</li>
+  <li>Zkontrolujte svůj mobil, zda má novou notifikaci o změně osvětlení a jestli aplikace <strong>Blynk</strong> ukazuje aktuální hodnotu.</li>
+</ol>
+
+    <button class="primary-button" onclick="document.getElementById('section-end').style.display='block'; this.style.display='none';">
+      Posílám si hodnotu osvětlení na mobil.
+    </button>
+</section>
+<section id="section-end" style="display:none;">
+
+<h3>Pošlete si všechna data</h3>
+<p>Podívejte se do <strong>Hardwario Playground</strong> na záložku <strong>Messages</strong>, kde najdete dostupná data ze svých modulů.</p>
+<p>Přidejte nové <strong>Datastreamy</strong> v Blynk a všechna data si odešlete do aplikace. Můžete tak sledovat různé veličiny přímo ve svém mobilu.</p>
+
+<p class="tip">Nezapomeňte na webové stránce Blynk při práci kliknout na tlačítko <strong>"Save and Apply"</strong>.</p>
+
+<img src="img/function_blynk2.png" alt="Ukázka nastavení Blynk node ve Flow">
+<img src="img/mobil_blynk.png" alt="Výstup do mobilní aplikace Blynk">
+  
+  
+     <h3>Shrnutí</h3>
+    <p>Nastavili jste si Blynk, aby dokázal přijímat a zpracovávat Datastream z vašeho seznoru.</p>
+    <p>Umíte z Playground posílat data do Blynk.</p>
+    <p>V mobilní aplikaci Blynk máte nastavený Dashboard pro zobrazení hodnot z Datastreamů.</p>
+
+   <button class="primary-button" onclick="ukoncitLekci()">
+      Posílám si více hodnot z Climate Module.
+    </button>
+  
+   
+  </section>
+
+  <script>
+    function ukoncitLekci() {
+      localStorage.setItem('lekce5Dokoncena', 'true');
+      alert("🎉 Skvělé, lekce 5 je dokončena!");
+      window.location.href = "index.html";
+    }
+  </script>
+</main>
+</body>
+</html>
+

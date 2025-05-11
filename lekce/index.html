@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Lekce IoT s Hardwariem</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .lesson-box {
+      margin: 2em auto;
+      max-width: 600px;
+      padding: 1em;
+      background-color: #444;
+      border-radius: 12px;
+    }
+
+    .lesson-box button {
+      background-color: #cc0000;
+      color: white;
+      padding: 1em 2em;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.2em;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+
+    .lesson-box button:hover {
+      background-color: #a80000;
+    }
+
+    .task-list {
+      margin-top: 1em;
+      padding-left: 1.5em;
+      text-align: left;
+      color: #f0f0f0;
+      font-family: Georgia, serif;
+    }
+
+    .checkmark {
+      float: right;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Lekce IoT s Hardwariem</h1>
+    <p>Pojďte pochopit internet věcí se stavebnicí Hardwario. Programování vás naučíme, komunikační protokoly také a pájení není potřeba.</p>
+
+    <div id="lesson-container">
+      <!-- Tady se lekce vygenerují JavaScriptem -->
+    </div>
+  </main>
+
+  <script>
+    const lessons = [
+      {
+        id: "lekce1",
+        title: "Připrav se",
+        link: "lekce1.html",
+        tasks: [
+          "Nainstaluj prostředí",
+          "Připoj dongle",
+          "Přehraj firmware",
+          "Spáruj modul"
+        ]
+      },
+      {
+        id: "lekce2",
+        title: "Měř a vykresluj",
+        link: "lekce2.html",
+        tasks: [
+          "Napiš funkci pro PIR modul",
+          "Vytiskni grafy s průběhem měření",
+          "Připoj další moduly"
+        ]
+      },
+      {
+        id: "lekce3",
+        title: "Ukázat či neukázat?",
+        link: "lekce3.html",
+        tasks: [
+        "Sleduj právy v Playground",
+        "Použij Switch pro hodnoty",
+        "Vytiskni text jen když"
+        ]
+      },
+      {
+        id: "lekce4",
+        title: "Světla!",
+        link: "lekce4.html",
+        tasks: [
+        "Připoj Power module",
+        "Rozsviť LED pásek",
+        "Nadefinuj barevné efekty LED pásku"
+        ]
+      },
+      {
+        id: "lekce5",
+        title: "Vzhůru na net",
+        link: "lekce5.html",
+        tasks: [
+        "Nainstaluj Blynk aplikace, zařiď si účet",
+        "Rozjeď komunikaci Hardwario Playground a Blynk",
+        "Nastav Dashboard v Blynk"
+        ]
+      }
+ 
+    ];
+
+    const container = document.getElementById('lesson-container');
+
+    lessons.forEach(lesson => {
+      const box = document.createElement('div');
+      box.className = 'lesson-box';
+
+      const button = document.createElement('button');
+      button.id = lesson.id + '-button';
+      button.onclick = () => location.href = lesson.link;
+      button.innerHTML = `Lekce ${lesson.id.replace('lekce', '')}: ${lesson.title} <span class="checkmark"></span>`;
+
+      const list = document.createElement('ul');
+      list.className = 'task-list';
+      lesson.tasks.forEach(task => {
+        const li = document.createElement('li');
+        li.textContent = task;
+        list.appendChild(li);
+      });
+
+      box.appendChild(button);
+      box.appendChild(list);
+      container.appendChild(box);
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      lessons.forEach(lesson => {
+        const completed = localStorage.getItem(lesson.id + '-completed');
+        const checkmark = document.querySelector(`#${lesson.id}-button .checkmark`);
+        if (completed === 'true' && checkmark) {
+          checkmark.textContent = '✅';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+

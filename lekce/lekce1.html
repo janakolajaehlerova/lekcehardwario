@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Lekce 1 – Připrav se</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>Připoj se a měř</h1>
+    <p class="prokoho">Trvání: 20 minut<br>Cílová skupina: pro jednotlivce</p>
+    
+    <p>Zapojte své Hardwario hračky, nainstalujte Hardwario Playground a začněte měřit.</p>
+
+    <p class="ukol">Úkol: Ověřte, že máte nainstalovaný Playground a že zařízení je připojeno přes Bluetooth.</p>
+
+<h3>Hardwario Playground</h3>
+
+<p>
+  Hardwario Playground je univerzální nástroj pro práci se stavebnicí Hardwario, dostupný pro Windows, macOS i Linux. 
+  Umožňuje vizuální programování a sledování aktuálního stavu senzorů v reálném čase.
+  Více informací najdete v <a href="https://docs.hardwario.com/tower/desktop-programming/about-playground/" target="_blank" rel="noopener noreferrer">oficiální dokumentaci</a>.
+</p>
+
+<p class="tip">
+  💡 Playground si můžete stáhnout na stránce <a href="https://docs.hardwario.com/tower/desktop-programming/playground-installation/" target="_blank" rel="noopener noreferrer">Download</a>. 
+  Vyberte si verzi podle vašeho operačního systému, stáhněte instalační soubor a postupujte podle průvodce instalací.
+</p>
+<p>
+  Po úspěšné instalaci a spuštění Hardwario Playground se otevře hlavní okno aplikace. V záložce <strong>Devices</strong> uvidíte seznam připojených zařízení. 
+  Pokud je vše správně zapojeno, objeví se zde vaše Hardwario zařízení. Na začátku však může být seznam prázdný – v takovém případě zkontrolujte, zda je zařízení správně připojeno přes USB a nainstalovány všechny potřebné ovladače.
+</p>
+<!-- Tlačítko pro pokračování -->
+<button class="primary-button" onclick="document.getElementById('radio-dongle-section').style.display='block'; this.style.display='none';">
+  Mám nainstalované Hardwario Playground
+</button>
+<!-- Skrytá část, která se zobrazí po kliknutí -->
+<section id="radio-dongle-section" style="display:none; margin-top:2rem;">
+  <h3>Radio dongle</h3>
+
+  <p>
+    Nyní připojte Radio dongle (USB modul) do volného USB portu vašeho počítače. Hardwario Playground by měl zařízení automaticky rozpoznat a zobrazit jej v seznamu Devices.
+    Pokud se dongle neobjeví, ujistěte se, že je správně zasunutý.
+  </p>
+  <img src="img/dongle.jpg" alt="Radio Dongle" width="800" height="600">
+<h3>Přehrání firmware</h3>
+<p><em>Tento krok je volitelný a doporučuje se provést pouze v případě, že si nejste jisti, kdo naposledy a jak pracoval s vaším Radio Donglem.</em></p>
+
+<p>
+  V menu vlevo najdete odkaz <strong>Firmware</strong>, kde je potřeba vyhledat <strong>hardwario/twr-gateway-radio-dongle</strong> a stisknout tlačítko „Flash firmware“. Tento krok zajistí, že dongle bude mít nejnovější verzi firmwaru, což může vyřešit případné problémy s připojením.
+</p>
+ <h3>Připoj Radio dongle</h3>
+<p>
+  V menu vpravo v sekci <strong>Devices</strong> klikněte na tlačítko <strong>Connect</strong>, čímž se Dongle připojí. Bohužel v tuto chvíli nebudou zobrazeny žádné další efekty ani indikátory připojení.
+</p> 
+<!-- Tlačítko pro připojení Radio Dongle (stejné jako předchozí tlačítko) -->
+<button class="primary-button" onclick="document.getElementById('pir-module-section').style.display='block'; this.style.display='none';">
+  Mám připojený Radio Dongle
+</button>
+<!-- Skrytá sekce pro PIR modul -->
+<section id="pir-module-section" style="display:none; margin-top:2rem;">
+<h3>Párování PIR modulu</h3>
+
+<img src="img/PIRmodule.jpg" alt="PIR Modul">
+<p>
+  Abyste mohli připojit PIR modul, musíte jej nejprve dostat do párovacího režimu Bluetooth. Tento režim aktivujete vložením baterií do modulu. Předtím, než vložíte baterie, přejděte do Hardwario Playground a klikněte na tlačítko <strong>Start pairing</strong>. Tento krok zahájí proces párování. 
+</p>
+
+<img src="img/PIRmodule_open.jpg" alt="PIR Modul otevřený">
+<p class="tip">
+  <em>Tip: Pokud párujete v učebně, kde je více modulů, ujistěte se, že spárujete právě ten svůj. Například tím, že si ověříte, že v daném okamžiku neprobíhá párování u jiných zařízení.</em>
+</p>
+
+<p>
+  Po vložení baterií se v Hardwario Playground objeví senzor, který se obvykle hlásí jako <strong>motion-detector:0</strong>. Jakmile se tento senzor objeví, znamená to, že je připojen. V levém menu v sekci <strong>Messages</strong> můžete sledovat výstupy z PIR modulu, které vám ukáží, zda senzor detekuje pohyb.
+</p>
+<p class="tip">
+  <em>Tip: Otočte PIR modul na bok. V sekci <strong>Messages</strong> by se měla objevit položka <strong>node/motion-detector:0/orientation</strong> (a nějaké číslo), což indikuje změnu orientace modulu.</em>
+</p>
+<h3>Přehrání firmware PIR modulu</h3>
+<p><em>Tento krok je volitelný a doporučuje se provést, pokud Core module sloužil v jiném projektu a nyní se nehlásí jako motion-detector. Také pokud si chcete být jisti, že používáte nejnovější firmware.</em></p>
+
+<p>
+  Nejprve najděte USB kabel pro připojení Core Modulu k počítači. V levém menu Hardwario Playground přejděte do sekce <strong>Firmware</strong>. V části <strong>Device</strong> uvidíte všechna připojená Hardwario zařízení, v mém případě je to <strong>bc-usb-dongle</strong> a <strong>hio-core-module</strong>. Vyberte <strong>hio-core-module</strong>.
+</p>
+
+<p>
+  V sekci firmware vyberte <strong>twr-radio-motion-detector</strong>, pro jednodušší orientaci se objeví i jeho fotka. Poté stiskněte tlačítko <strong>Flash firmware</strong>.
+</p>
+<h3>Shrnutí</h3>
+<p>
+  Modul je připojený, prostředí připravené, můžete začít měřit.
+</p>
+
+<button class="primary-button" onclick="lessonCompleted()">
+  PIR modul je připojený a plní Messages
+</button>
+
+<script>
+function lessonCompleted() {
+    alert("Výborně, hotovo!");
+    window.localStorage.setItem('lekce1hotova', 'true');
+    window.location.href = 'index.html';
+}
+</script>
+	
+</section>
+</section>
+
+    <p><a href="index.html">← Zpět na úvod</a></p>
+  </main>
+</body
+

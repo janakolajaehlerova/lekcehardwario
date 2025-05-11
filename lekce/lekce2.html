@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Lekce 2 – Měř a vykresluj</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <h1>Prostředí Hardwario Playground</h1>
+
+  <p class="prokoho">
+    🧑‍💻 Trvání: 30 minut<br>
+    🎯 Cílová skupina: pro jednotlivce i malé skupiny
+  </p>
+
+  <section id="section-start">
+    <h3>Úvod do vizuálního programování</h3>
+    <p>Playground umožňuje programování přetahováním bloků a okamžitě reaguje na připojené moduly.</p>
+
+    <h3>Začínáme s Hardwario Playgroundem</h3>
+    <p>Ověřte si, že máte z předchozí lekce vše připraveno:</p>
+    <ul>
+      <li>✅ Playground je spuštěný</li>
+      <li>✅ Dongle je připojený</li>
+      <li>✅ PIR senzor má baterie</li>
+      <li>✅ V <em>Messages</em> vidíte výstupy z PIR senzoru</li>
+    </ul>
+
+    <button class="primary-button" onclick="document.getElementById('section-prvniprogram').style.display='block'; this.style.display='none';">
+      Mám otevřený Hardwario Playground
+    </button>
+  </section>
+
+  <section id="section-prvniprogram" style="display:none;">
+    <h3>První program</h3>
+    <p>Vytvořte program pro zpracování výstupů z PIR modulu.</p>
+
+    <p>Tento text není úplná dokumentace Node-RED. Doporučujeme <a href="https://docs.hardwario.com/tower/desktop-programming/node-red-programming" target="_blank">oficiální příklady</a>.</p>
+
+    <p class="ukol">
+      Úkol: Připravte přehledový dashboard s následujícími prvky:
+    </p>
+    <ul>
+      <li>🧭 Měřidlo (gauge) pro orientaci PIR modulu</li>
+      <li>📈 Graf orientace v čase</li>
+      <li>🌡️ Graf teploty v čase</li>
+    </ul>
+    <p>Dbejte na popisky os – osa X pro čas, osa Y pro hodnotu.</p>
+
+    <button class="primary-button" onclick="document.getElementById('reseni-section').style.display = 'block'; this.style.display='none';">
+      Mám naprogramováno a chci si porovnat řešení
+    </button>
+  </section>
+
+  <section id="reseni-section" style="display:none;">
+    <h3>Ukázkové řešení</h3>
+    <p>Funkce pro zpracování dat z PIR modulu:</p>
+    <p><img src="img/function_orientation.png" alt="Funkce PIR" style="max-width:100%;"></p>
+    <p>Výsledný dashboard:</p>
+    <p><img src="img/chart_orientation.png" alt="Výstupní grafy" style="max-width:100%;"></p>
+
+
+    <h3>Shrnutí</h3>
+    <p>Už umíte připojit moduly, sledovat jejich výstupy a zobrazit je graficky.</p>
+    <p>Zkuste připojit Climate Module a sledovat tlak, vlhkost nebo světlo.</p>
+    <p>PIR modul byl použit pro orientaci a teplotu. Jeho detekce pohybu je méně vhodná pro rychlé testování, ale můžete ji zkusit, pokud je v okolí klid.</p>
+
+    <button class="primary-button" onclick="ukoncitLekci()">
+      Umím připojit moduly, přečíst je a naplnit grafy
+    </button>
+  </section>
+</main>
+
+<script>
+  function ukoncitLekci() {
+    localStorage.setItem('lekce2Dokoncena', 'true');
+    alert("🎉 Výborně, lekce je dokončena!");
+    window.location.href = "index.html";
+  }
+</script>
+</body>
+</html>
+
